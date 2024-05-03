@@ -79,3 +79,61 @@ edit($id): Metode ini biasanya digunakan untuk menampilkan formulir untuk menged
 update(Request $request, $id): Metode ini digunakan untuk memperbarui data yang sudah ada di basis data berdasarkan data yang diterima dari formulir. Misalnya, mengubah informasi pengguna yang sudah ada.
 destroy($id): Metode ini digunakan untuk menghapus data dari basis data berdasarkan ID atau kriteria lainnya. Misalnya, menghapus pengguna dari sistem.
 otherMethods(): Selain metode-metode CRUD yang umum digunakan, Anda juga dapat menambahkan metode kustom sesuai kebutuhan aplikasi Anda. Metode-metode ini dapat melakukan tindakan khusus atau operasi yang diperlukan untuk aplikasi Anda.
+
+4. memindahkan file controller 
+tujuan dari memindahkan file controller iini adalah jika projek yang sudah di kerjakan sudah kompleks atau besar
+
+Namun kita tidak bisa sekedar memindahkan file controller karena ada beberapa hal yang
+mesti disiapkan.
+
+pertama tama buatlah folder dengan nama yang sesui dengan projek yang kalian buat cth nya saya adalah admin
+kemudian pindah file controller nya
+seteruktur folder nya Controllers\Admin\NamaController.php
+nah di folder admin ini seolah olah kita 
+menampung semua controller nya yang berkaitan dengan pemerosesan admin hehhe. 
+
+Karena file ini sudah di pindah, ada beberapa hal yang harus kita ubah. Pertama, penulisan
+namespace di baris 3 harus disesuaikan dengan alamat path yang baru, yakni menjadi:
+namespace App\Http\Controllers\Admin;
+
+Karena namespace sudah berubah, kita juga tidak bisa langsung mengakses class Controller
+untuk di extends di baris 5. Alasannya karena class Controller tersebut tersimpan di file
+Controller.php yang berada di namespace App\Http\Controllers, bukan App\Http\ Controllers\Admin.
+
+jadi nya perlu di import terlebih dahulu 
+yang jadi pertanyaan di route nya perlu di ubah juga? jawaban nya perlu banget hehe
+
+# controllernya
+<?php
+
+namespace App\Http\Controllers\admin;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+class PageController extends Controller
+{
+    //
+    public function index(){
+       return 'Halamang Home';
+    }
+
+    public function tampil() {
+        $arrayangka = ["1", "2", "3", "4", "5", "6"];
+        return view('tampil')->with('angka',$arrayangka);
+        // angka ini harus sama dengan yang di panggil di view tampil
+    }
+}
+
+# route nya
+// sebelum di pindah file controller nya
+// use App\Http\Controllers\PageController;
+
+// sesudah di pindah 
+use App\Http\Controllers\admin\PageController;
+
+// Route::get('<url>',[App\Http\Controllers\Nama_Controller::class,'nama_method']);
+Route::get('/',[PageController::class,'index']);
+Route::get('/tampil',[PageController::class,'tampil']);
+
+
+
