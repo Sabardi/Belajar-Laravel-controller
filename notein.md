@@ -56,4 +56,26 @@ yang di maksud kan adalah nama class yang di berikan dari routes nya
 Route::get('/tampil',[NamaController::class,'tampil']);
 
 melakukan pengiriman data dari controller ke view
+    public function tampil() {
+        $arrayangka = ["1", "2", "3", "4", "5", "6"];
+        return view('tampil')->with('angka',$arrayangka);
+        // angka ini harus sama dengan yang di panggil di view tampil
+    }
 
+    disini kita akan mengirim data dari controller ke view
+    yang pertama ada variable $arrayangka yang menampung data kemudian di kembalikan ke view (di kirim ke view) dengan method width() yang sudah kita pelajri di route (link belajar nya)
+Selain metode with(), beberapa metode umum lainnya yang digunakan di dalam controller Laravel antara lain:
+
+findOrFail(): Digunakan untuk menemukan entitas berdasarkan ID, dan jika tidak ditemukan, akan melempar pengecualian.
+orderBy(): Digunakan untuk mengurutkan hasil query berdasarkan kolom tertentu.
+where(): Digunakan untuk menambahkan kriteria ke query.
+paginate(): Digunakan untuk membagi hasil query menjadi beberapa halaman.
+first(): Digunakan untuk mendapatkan hanya satu entitas pertama yang cocok dengan kriteria.
+
+dan
+
+store(Request $request): Metode ini digunakan untuk menyimpan data baru ke dalam basis data. Misalnya, menambahkan pengguna baru ke dalam sistem berdasarkan data yang diterima dari formulir.
+edit($id): Metode ini biasanya digunakan untuk menampilkan formulir untuk mengedit sumber daya yang sudah ada. Misalnya, menampilkan formulir untuk mengubah informasi pengguna.
+update(Request $request, $id): Metode ini digunakan untuk memperbarui data yang sudah ada di basis data berdasarkan data yang diterima dari formulir. Misalnya, mengubah informasi pengguna yang sudah ada.
+destroy($id): Metode ini digunakan untuk menghapus data dari basis data berdasarkan ID atau kriteria lainnya. Misalnya, menghapus pengguna dari sistem.
+otherMethods(): Selain metode-metode CRUD yang umum digunakan, Anda juga dapat menambahkan metode kustom sesuai kebutuhan aplikasi Anda. Metode-metode ini dapat melakukan tindakan khusus atau operasi yang diperlukan untuk aplikasi Anda.
