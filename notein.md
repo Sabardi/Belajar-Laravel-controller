@@ -136,4 +136,38 @@ Route::get('/',[PageController::class,'index']);
 Route::get('/tampil',[PageController::class,'tampil']);
 
 
+5. mengakses ekternal class 
+untuk projek besar dan kompleks terkadang kita perlu membuatkan class sendiri kemudian di akses dari contoller. yang kita lakukan hanya mengatur namespace nya.
+
+buatlah folder di dalam controller dan dengan nama bebas, kemudian buat file bernama Foo.php. struktur folder nya seperti ini App\Http\Controllers\Coba\Foo.php.
+
+kemudian definiskan  namespace App\Http\Controllers\Coba; nya. class Foo
+{
+    public function bar(){
+        return 'Ini berasal dari Method Bar di dalam class Foo';
+        // atau mengunakan echo 'pesan nya '
+    }
+}
+
+selanjut nya kita mencoba mengakses kelas yg baru kita buat ini di admin/PageController nya akan tetapi sebelum nya kita belom membuatkan route nya di web.php route nya sama seperi sebelum sebelum nya.
+
+Route::get('/coba/kelas',[PageController::class,'coba']);
+
+kemudian kita buat di controller nya seperi sebelum sebelum nya 
+
+    public function coba(){
+        $foo = new \App\Http\Controllers\Coba\Foo();
+        echo $foo->bar();
+    }
+di sini kita membuat $foo = new \App\Http\Controllers\Coba\Foo(); ini bertujuan untuk mengakses kelas yang kita buat dan seharus nya mengakses namespace nya kemudian di panggil untuk di tampilkan ke layar
+akan tetapi ada car lain nya yaitu langsung mendefiniskan kelas yang di buat dengan cara
+
+use App\Http\Controllers\Coba\Foo;
+
+sekarang tinggal kita pake saja dan panggil
+    
+    public function coba(){
+        $foo = new Foo;
+        echo $foo->bar();
+    }
 
