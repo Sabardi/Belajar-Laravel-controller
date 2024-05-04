@@ -171,3 +171,9 @@ sekarang tinggal kita pake saja dan panggil
         echo $foo->bar();
     }
 
+di laravel ada printah printah tersendiri yang salah satu nya untuk membuat controller ini 
+temen temen bisa mengetikan php artisan list nanti temen temen baca sendiri ya
+heheheh dikarenakan buanyak sekali
+contoh untuk membust controller 
+php artisan make:controller NamaController 
+dan sebenarnya kita sudah menggunakan nya sebelumnya
